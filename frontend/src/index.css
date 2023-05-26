@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.btn {
+		@apply w-full bg-black text-white py-3 uppercase font-semibold hover:text-black hover:bg-white hover:outline hover:outline-[3px] hover:outline-black transition-colors duration-100 ease-in-out active:bg-black active:text-white;
+	}
+	.btn-secondary {
+		@apply w-full bg-white text-black py-3 uppercase font-semibold hover:text-white hover:bg-black outline outline-[3px] outline-black transition-colors duration-100 ease-in-out active:bg-white active:text-black;
+	}
+	.btn-outline {
+		@apply w-full bg-black text-white py-3 uppercase font-semibold hover:text-black hover:bg-white outline outline-[2px] outline-white transition-colors duration-100 ease-in-out active:bg-black active:text-white;
+	}
+	.btn-no-outline {
+		@apply w-full bg-black text-white py-3 uppercase font-semibold hover:text-black hover:bg-white  transition-colors duration-100 ease-in-out active:bg-black active:text-white;
+	}
+	/* ... */
+}
