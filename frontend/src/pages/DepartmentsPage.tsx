@@ -4,6 +4,7 @@ import Table from '../components/Table';
 import { useGetAllDepartmentsQuery } from '../features/department/departmentEndPoints';
 import { setDepartments } from '../features/department/departmentSlice';
 import SideBar from '../components/SideBar';
+import Loader from '../components/Loader';
 
 type Props = {};
 export default function DepartmentsPage({}: Props) {
@@ -26,8 +27,7 @@ export default function DepartmentsPage({}: Props) {
 		};
 		fetchEvents();
 	}, [dispatch, data]);
-	if (isFetching || !departments)
-		return <h1 className='text-center'>Loading</h1>;
+	if (isFetching) return <Loader />;
 	return (
 		<div>
 			<Table departments={departments} />

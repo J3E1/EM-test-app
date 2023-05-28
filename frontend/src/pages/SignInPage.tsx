@@ -5,6 +5,8 @@ import { useLoginMutation } from '../features/users/userEndpoints';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../features/users/authSlice';
 import { useAppDispatch } from '../app/hooks';
+import { toast } from 'react-toastify';
+import errorExtractor from '../utils/errorExtractor';
 
 interface FormData {
 	email: string;
@@ -32,12 +34,15 @@ export default function SignInPage({}: Props) {
 					},
 				})
 			);
+			toast.success(res.message);
 			navigate('/');
 		} catch (error) {
 			console.log(
 				'🚀 ~ file: SignInPage.tsx:22 ~ submitHandler ~ error:',
 				error
 			);
+
+			errorExtractor(error);
 		}
 	};
 	const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

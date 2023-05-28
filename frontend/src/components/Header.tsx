@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { logout } from '../features/users/authSlice';
+import { toast } from 'react-toastify';
 type Props = {};
 export default function Header({}: Props) {
 	const { userInfo } = useAppSelector(state => state.auth);
@@ -9,6 +10,7 @@ export default function Header({}: Props) {
 	const navigate = useNavigate();
 	const logOutHandler = () => {
 		navigate('/signin');
+		toast.info('Logged out successfully');
 		dispatch(logout());
 	};
 

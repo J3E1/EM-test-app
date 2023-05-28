@@ -1,7 +1,17 @@
-import { AxiosError } from 'axios';
-export default function errorExtractor(error: unknown) {
-	console.log('💥💥 error:', error);
-	if (error instanceof AxiosError) return error.message;
-	if (error instanceof Error) return error.message;
-	return '💥💥 error occurred 💥💥 ';
+import { toast } from 'react-toastify';
+export default function errorExtractor(err: unknown) {
+	if (typeof err === 'object' && err !== null && 'data' in err) {
+		const errorResponse = (err as { data: { message: string } }).data;
+		if (
+			typeof errorResponse === 'object' &&
+			errorResponse !== null &&
+			'message' in errorResponse
+		) {
+			toast.error(errorResponse.message);
+		} else {
+			toast.error('Invalid error response format');
+		}
+	} else {
+		toast.error('Unknown error occurred');
+	}
 }

@@ -9,6 +9,8 @@ import DepartmentsPage from './pages/DepartmentsPage';
 import { useAppSelector } from './app/hooks';
 import PrivateRoute from './components/PrivateRoute';
 import EmployeesPage from './pages/EmployeesPage';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 	return (
@@ -24,20 +26,10 @@ function App() {
 							<Route path='/departments' element={<DepartmentsPage />} />
 							<Route path='/employees' element={<EmployeesPage />} />
 						</Route>
-						{/* <Route path='/forgot-password' element={<ForgotPasswordPage />} />
-					<Route path='/reset-password' element={<SetNewPasswordPage />} />
-					<Route path='/otp-verification' element={<OtpVerificationPage />} />
-					<Route path='' element={<PrivateRoute />}>
-						<Route path='/' element={<HomePage />} />
-						<Route path='/events' element={<EventsPage />} />
-						<Route path='/events/:eventId' element={<EventDetailPage />} />
-						<Route path='/about' element={<AboutPage />} />
-						<Route path='/contact' element={<ContactPage />} />
-						<Route path='/update-password' element={<UpdatePassword />} />
-					</Route> */}
 					</Routes>
 				</div>
 			</div>
+			<ToastContainer theme='dark' />
 		</BrowserRouter>
 	);
 }

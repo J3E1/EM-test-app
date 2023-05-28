@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 
 import Select from 'react-select';
 
-import Input from './Input';
+import { toast } from 'react-toastify';
 import { MultiValue } from 'react-select';
 import { useGetAllEmployeesQuery } from '../features/employee/employeeEndpoints';
 import { setEmployees } from '../features/employee/employeeSlice';
@@ -44,6 +44,9 @@ export default function Features() {
 	const [createDepartment] = useCreateDepartmentMutation();
 	const [updateDepartment] = useUpdateDepartmentMutation();
 	const [emplArr, setEmplArr] = useState<{ _id: string; email: string }[]>([]);
+	const [editMode, setEditMode] = useState(
+		mode === 'CREATE' || mode === 'EDIT'
+	);
 	const handleEmployeeChange = (
 		selectedOptions: MultiValue<{
 			value: string;
@@ -57,9 +60,6 @@ export default function Features() {
 
 		setEmplArr(updatedEmployees);
 	};
-	const [editMode, setEditMode] = useState(
-		mode === 'CREATE' || mode === 'EDIT'
-	);
 	useEffect(() => {
 		if (mode === 'CREATE') {
 			setDepartment({
@@ -108,8 +108,7 @@ export default function Features() {
 					data,
 					token: userInfo?.token as string,
 				}).unwrap();
-				console.log('🚀 ~ ', res);
-				// toast.success('Event created successfully');
+				toast.success('Event created successfully');
 			}
 			if (mode === 'EDIT') {
 				const res = await updateDepartment({
@@ -117,8 +116,7 @@ export default function Features() {
 					data,
 					token: userInfo?.token as string,
 				}).unwrap();
-				console.log('🚀 ~ ', res);
-				// toast.success('Event updated successfully');
+				toast.success('Event updated successfully');
 			}
 			dispatch(closeSidebar());
 		} catch (err) {
@@ -272,7 +270,7 @@ export default function Features() {
 											}))
 										}
 										type='text'
-										className='h-10 text-black border border-gray-light rounded-sm w-full py-2 px-3 leading-tight focus:outline-none focus:bg-primary-light'
+										className='h-10 text-black border border-gray-light rounded-none w-full py-2 px-3 leading-tight focus:outline-2 border-[#cccccc] placeholder:text-[#808080]'
 										placeholder='Enter Salary'
 										value={department.salary}
 									/>

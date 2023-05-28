@@ -4,7 +4,8 @@ import Input from '../components/Input';
 import { setCredentials } from '../features/users/authSlice';
 import { useAppDispatch } from '../app/hooks';
 import { useRegisterMutation } from '../features/users/userEndpoints';
-
+import errorExtractor from '../utils/errorExtractor';
+import { toast } from 'react-toastify';
 interface FormData {
 	firstName: string;
 	lastName: string;
@@ -45,12 +46,14 @@ export default function RegisterPage({}: Props) {
 					},
 				})
 			);
+			toast.success(res.message);
 			navigate('/');
 		} catch (error) {
 			console.log(
 				'🚀 ~ file: SignInPage.tsx:22 ~ submitHandler ~ error:',
 				error
 			);
+			errorExtractor(error);
 		}
 	};
 	const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +66,7 @@ export default function RegisterPage({}: Props) {
 	};
 
 	return (
-		<main className='max-w-xl mx-auto min-h-fit p-10 text-md bg-white'>
+		<main className='max-w-xl mx-auto min-h-fit p-10 text-md bg-white shadow-md '>
 			<h1 className='text-4xl font-bold uppercase text-center my-8'>
 				Register
 			</h1>
