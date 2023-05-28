@@ -108,7 +108,7 @@ export default function Features() {
 					data,
 					token: userInfo?.token as string,
 				}).unwrap();
-				toast.success('Event created successfully');
+				toast.success('Department created successfully');
 			}
 			if (mode === 'EDIT') {
 				const res = await updateDepartment({
@@ -116,7 +116,7 @@ export default function Features() {
 					data,
 					token: userInfo?.token as string,
 				}).unwrap();
-				toast.success('Event updated successfully');
+				toast.success('Department updated successfully');
 			}
 			dispatch(closeSidebar());
 		} catch (err) {
