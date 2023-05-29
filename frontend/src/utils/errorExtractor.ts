@@ -1,5 +1,9 @@
 import { toast } from 'react-toastify';
 export default function errorExtractor(err: unknown) {
+	if (err instanceof Error) {
+		toast.error(err.message);
+		return;
+	}
 	if (typeof err === 'object' && err !== null && 'data' in err) {
 		const errorResponse = (err as { data: { message: string } }).data;
 		if (
